@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criativos de Clima</title>
+<style>
+  :root{
+    --bg:#f4f7f3; --card:#ffffff; --ink:#1c2a22; --muted:#5d6b61;
+    --line:#e3eadf; --sky:#2b9fd6; --sky-ink:#0d6d9c;
+    --sun:#f3a712; --grass:#3f9b4f; --grass-ink:#2c7439;
+    --rain:#5b7fb5; --warm:#fff6e6; --shadow:0 6px 24px rgba(28,42,34,.08);
+  }
+  :root:not([data-theme="light"]){}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#121712; --card:#1b221b; --ink:#e9efe7; --muted:#9fb0a2;
+      --line:#2b352b; --sky:#4fb6e6; --sky-ink:#8fd3f2; --sun:#f6bb4a;
+      --grass:#5bc06d; --grass-ink:#9ee3a8; --rain:#89a6d6;
+      --warm:#2a2515; --shadow:0 6px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121712; --card:#1b221b; --ink:#e9efe7; --muted:#9fb0a2;
+    --line:#2b352b; --sky:#4fb6e6; --sky-ink:#8fd3f2; --sun:#f6bb4a;
+    --grass:#5bc06d; --grass-ink:#9ee3a8; --rain:#89a6d6;
+    --warm:#2a2515; --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 64px}
+  header.hero{background:linear-gradient(135deg,var(--sky) 0%,var(--grass) 100%);
+    color:#fff;border-radius:22px;padding:30px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  header.hero::after{content:"☀️";position:absolute;right:18px;top:12px;font-size:70px;opacity:.25}
+  .kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.9}
+  header.hero h1{margin:.2em 0 .15em;font-size:30px;line-height:1.1}
+  header.hero p{margin:0;max-width:60ch;font-size:16px;opacity:.95}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 6px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+  .stat b{display:block;font-size:26px;color:var(--grass-ink);line-height:1}
+  .stat span{font-size:12.5px;color:var(--muted);display:block;margin-top:5px}
+  .note{background:var(--warm);border:1px solid var(--line);border-left:5px solid var(--sun);
+    border-radius:12px;padding:15px 17px;margin:22px 0;font-size:15px}
+  .note b{color:var(--sun)}
+  h2{font-size:21px;margin:34px 0 4px;display:flex;align-items:center;gap:9px}
+  h2 .em{font-size:22px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .thumb{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .tipo{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;letter-spacing:.05em;
+    text-transform:uppercase;color:#fff;padding:4px 9px;border-radius:999px;backdrop-filter:blur(3px)}
+  .tipo.vid{background:rgba(43,159,214,.92)}
+  .tipo.img{background:rgba(63,155,79,.92)}
+  .badge-roas{position:absolute;bottom:10px;right:10px;background:rgba(243,167,18,.95);color:#2a1d00;
+    font-weight:800;font-size:13px;padding:5px 10px;border-radius:999px}
+  .cbody{padding:14px 15px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .hook{font-weight:700;font-size:15.5px;line-height:1.3}
+  .metrics{display:flex;gap:14px;flex-wrap:wrap}
+  .metrics div{font-size:12.5px;color:var(--muted)}
+  .metrics b{display:block;font-size:17px;color:var(--ink)}
+  .copy{font-size:13px;color:var(--muted);white-space:pre-line;border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
+  .tagrow{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-size:11px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--muted)}
+  .formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;box-shadow:var(--shadow)}
+  .fcard h3{margin:0 0 6px;font-size:16px;color:var(--sky-ink)}
+  .fcard p{margin:0;font-size:14px;color:var(--muted)}
+  .pauta{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .pauta li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;
+    display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}
+  .pauta .ic{font-size:22px;line-height:1.2}
+  .pauta .tx b{display:block;font-size:15px}
+  .pauta .tx span{font-size:13.5px;color:var(--muted)}
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+  @media(max-width:620px){.stats{grid-template-columns:repeat(2,1fr)}header.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Spitz Pomer · Biblioteca de criativos</div>
+    <h1>Criativos de clima que mais venderam</h1>
+    <p>Os criativos ligados ao clima e ao fim de semana estão entre os que mais vendem na conta. Aqui estão os campeões do histórico, com o que cada um fez e por quê funciona, pra servir de base na produção dos próximos.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>62</b><span>criativos de clima já rodados</span></div>
+    <div class="stat"><b>21</b><span>venderam de verdade</span></div>
+    <div class="stat"><b>R$ 12,62</b><span>melhor custo por venda</span></div>
+    <div class="stat"><b>15,5x</b><span>melhor retorno (ROAS)</span></div>
+  </div>
+
+  <div class="note">
+    <b>Por que isso importa:</b> criativo de clima tem validade curta. Ele vende muito bem nos primeiros dias e vai perdendo força conforme roda. Por isso o segredo é ter sempre material novo pronto pra girar a cada fim de semana e mudança de tempo. Os modelos abaixo são o que já deu certo.
+  </div>
+
+  <h2><span class="em">🏆</span> Os campeões</h2>
+  <p class="sub">Ordenados por desempenho. Vídeo em azul, imagem em verde. O número grande no canto é o retorno sobre o investido.</p>
+  <div class="grid" id="grid"></div>
+
+  <h2><span class="em">🧪</span> A fórmula do criativo de clima que vende</h2>
+  <p class="sub">Padrões que se repetem nos campeões.</p>
+  <div class="formula">
+    <div class="fcard"><h3>O céu dá o sinal</h3><p>Abrir conectando o tempo à decisão: “O céu já deu o sinal: esse fim de semana é pra sair de casa!”. Transforma a previsão em motivo pra agir agora.</p></div>
+    <div class="fcard"><h3>Previsão = aventura</h3><p>Brincar com a previsão do tempo: “Olha só a previsão de hoje… aventura o dia inteiro!”. Dia de sol vira convite, dia de chuva vira “temos área coberta”.</p></div>
+    <div class="fcard"><h3>Frio chegou</h3><p>O gancho do frio também vende (ROAS 9,8 e custo por venda de R$ 20). Clima frio pede programa diferente, e o parque entra como a resposta.</p></div>
+    <div class="fcard"><h3>Urgência do fim de semana</h3><p>“Zero desculpa pra ficar parado”, “o melhor fim de semana em Pomerode”. Prazo curto e natural: o fim de semana que está chegando.</p></div>
+    <div class="fcard"><h3>Família inteira junta</h3><p>Das crianças na mini fazenda à vovó na rede. Um ingresso, todo mundo se diverte. Reforça o “dia perfeito” que o clima bom promete.</p></div>
+    <div class="fcard"><h3>Clima + cupom</h3><p>Juntar o gancho de clima com oferta (cupom FERIAS) puxou os maiores volumes de venda nos estáticos. Clima atrai, desconto fecha.</p></div>
+  </div>
+
+  <h2><span class="em">🎬</span> Pauta sugerida de novos criativos</h2>
+  <p class="sub">O que vale produzir pra manter o fluxo. Idealmente vídeo, que é o que mais rende.</p>
+  <ul class="pauta">
+    <li><span class="ic">🌤️</span><span class="tx"><b>Fim de semana de sol</b><span>“O céu deu o sinal” — convite pra sair de casa, com imagens de sol, tirolesa e água. O modelo campeão.</span></span></li>
+    <li><span class="ic">🌧️</span><span class="tx"><b>Dia de chuva / área coberta</b><span>Virar a chuva a favor: tem atração coberta, o parque funciona mesmo nublado. Pouco explorado e com espaço.</span></span></li>
+    <li><span class="ic">❄️</span><span class="tx"><b>Frio chegou</b><span>Programa de frio: o que fazer num fim de semana gelado. Já provou que vende barato.</span></span></li>
+    <li><span class="ic">📅</span><span class="tx"><b>Previsão da semana</b><span>“Olha a previsão: tempo bom chegando”. Atualizar conforme a previsão real de cada semana.</span></span></li>
+    <li><span class="ic">☀️</span><span class="tx"><b>Verão refrescante</b><span>Calor vira diversão, jato de água vira risada. Ângulo forte pra temporada de calor.</span></span></li>
+    <li><span class="ic">🎟️</span><span class="tx"><b>Clima + cupom</b><span>Combinar o gancho de tempo bom com a oferta vigente, no formato estático que mais vendeu.</span></span></li>
+  </ul>
+
+  <footer>Material de referência para produção de novos criativos · Spitz Pomer</footer>
+</div>
+
+<script>
+const ADS = [
+  {capa:"capas/capa_00.jpg",tipo:"vid",nome:"Fim de semana de sol (vídeo)",compras:24,cpa:"R$ 39,84",roas:"7,6x",
+    hook:"“O céu já deu o sinal: esse fim de semana é PRA SAIR DE CASA!”",
+    tags:["prospecção","sol","fim de semana"],
+    copy:"Tirolesa, tubing, aventura e muita diversão em família do jeitinho que um dia de sol pede. Garante seu ingresso e vem viver o melhor fim de semana em Pomerode!"},
+  {capa:"capas/capa_03.jpg",tipo:"img",nome:"Clima de domingo + cupom",compras:15,cpa:"R$ 27,96",roas:"11,1x",
+    hook:"“As melhores memórias das férias não se compram… mas o ingresso a gente ajuda com desconto.”",
+    tags:["estático","domingo","cupom FERIAS"],
+    copy:"A família INTEIRA se diverte junta: das crianças na mini fazenda à vovó na rede. Use o cupom FERIAS e garanta o seu com desconto."},
+  {capa:"capas/capa_01.jpg",tipo:"img",nome:"Clima de sábado + cupom",compras:17,cpa:"R$ 39,88",roas:"7,6x",
+    hook:"“As melhores memórias das férias não se compram…”",
+    tags:["estático","sábado","cupom FERIAS"],
+    copy:"Um ingresso, atrações ilimitadas e um dia que ninguém esquece. Use o cupom FERIAS e garanta o seu com desconto."},
+  {capa:"capas/capa_04.jpg",tipo:"vid",nome:"O Frio Chegou",compras:14,cpa:"R$ 20,70",roas:"9,8x",
+    hook:"Gancho do frio: o que fazer num fim de semana gelado.",
+    tags:["vídeo","frio","custo baixo"],
+    copy:"O clima frio como motivo pra um programa diferente em família, com o parque como resposta. Um dos menores custos por venda da conta."},
+  {capa:"capas/capa_02.jpg",tipo:"vid",nome:"O Frio Chegou (remarketing)",compras:17,cpa:"R$ 25,82",roas:"6,2x",
+    hook:"Mesmo gancho do frio, mirado em quem já conhece o parque.",
+    tags:["vídeo","frio","remarketing"],
+    copy:"Rodado pra quem já visitou o site ou interagiu. Clima frio reativando o público quente."},
+  {capa:"capas/capa_05.jpg",tipo:"vid",nome:"Dia perfeito de sol",compras:9,cpa:"R$ 18,29",roas:"11,0x",
+    hook:"“Sabe aquele dia perfeito, de sol, temperatura boa e zero desculpa pra ficar parado?”",
+    tags:["vídeo","sol","prospecção"],
+    copy:"É esse que vem aí. E não tem lugar melhor pra aproveitar do que o Spitz Pomer. Garante seu ingresso e vem viver o melhor fim de semana."},
+  {capa:"capas/capa_09.jpg",tipo:"img",nome:"Tempo bom combina com Spitz",compras:6,cpa:"R$ 43,65",roas:"3,8x",
+    hook:"“Tempo bom combina com Spitz Pomer!”",
+    tags:["estático","sol","direto"],
+    copy:"Um dia inteiro de aventura pra família toda, com tirolesa, tubing e muito mais. Garanta seu Passaporte!"},
+  {capa:"capas/capa_10.jpg",tipo:"img",nome:"Tempo bom (domingo)",compras:5,cpa:"R$ 40,55",roas:"5,2x",
+    hook:"“Tempo bom combina com Spitz Pomer!”",
+    tags:["estático","domingo"],
+    copy:"Variação de domingo do mesmo gancho direto de tempo bom. Simples e com bom retorno."},
+  {capa:"capas/capa_11.jpg",tipo:"vid",nome:"Fim de semana (remarketing)",compras:3,cpa:"R$ 12,62",roas:"15,5x",
+    hook:"“Que tal um dia de aventura no Spitz Pomer?”",
+    tags:["vídeo","remarketing","retorno recorde"],
+    copy:"Do radical ao tranquilo, pra família toda. Rodado no público quente: o menor custo por venda e o maior retorno de todos."}
+];
+const g = document.getElementById("grid");
+g.innerHTML = ADS.map(a=>`
+  <article class="card">
+    <div class="thumb">
+      <img src="${a.capa}" alt="${a.nome}" loading="lazy">
+      <span class="tipo ${a.tipo}">${a.tipo==="vid"?"Vídeo":"Imagem"}</span>
+      <span class="badge-roas">${a.roas}</span>
+    </div>
+    <div class="cbody">
+      <div class="hook">${a.hook}</div>
+      <div class="metrics">
+        <div><b>${a.compras}</b>vendas</div>
+        <div><b>${a.cpa}</b>por venda</div>
+      </div>
+      <div class="tagrow">${a.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      <div class="copy">${a.copy}</div>
+    </div>
+  </article>`).join("");
+</script>
+</body>
+</html>
